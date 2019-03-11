@@ -1,11 +1,15 @@
 {
-  "name": "spotimy",
+  "name": "spograph",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "d3": "^5.9.1",
+    "query-string": "^6.3.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "styled-components": "^4.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
