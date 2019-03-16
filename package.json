@@ -7,8 +7,11 @@
     "query-string": "^6.3.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,6 +30,7 @@
   ],
   "devDependencies": {
     "d3": "^5.9.1",
+    "lodash": "^4.17.11",
     "react-svgmt": "^1.1.7",
     "styled-components": "^4.1.3"
   }

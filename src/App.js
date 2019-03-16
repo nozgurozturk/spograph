@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route} from "react-router-dom";
 import Landing from "./containers/Landing";
-import SpotifyAuth from "./components/SpotifyAuth";
+import Profile from "./containers/Profile";
 
 export default class App extends Component {
   render() {
     return (
+      <BrowserRouter>
       <div className="App">
-        <Landing></Landing>
-        <SpotifyAuth />
+        <Route exact path="/" component={Landing}/>
+        <Route path="/profile" component={Profile}/>
       </div>
+      </BrowserRouter>
     );
   }
 }

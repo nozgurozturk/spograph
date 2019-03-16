@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 import { SvgLoader} from "react-svgmt";
 import styled from "styled-components";
 import person from "../assets/images/Landing.svg";
-import slogo from "../assets/images/Logo.svg";
+import logo from "../assets/images/Logo.svg";
+
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,11 +60,11 @@ const LoginButton = styled.button`
     #c63dd7,
     #6c5dff
   );
-  box-shadow: 0px 2px 4px #1a1a1a;
+  /* box-shadow: 0px 2px 4px #1a1a1a; */
   transition: 400ms;
   &:hover {
     transition: 400ms;
-    transform: translateY(-1vh);
+    transform: translateY(-1vh) scale(1.05);
     box-shadow: 0px 4px 8px #1a1a1a;
   }
 `;
@@ -69,9 +72,10 @@ export default class Landing extends Component {
   render() {
     return (
       <Wrapper>
-        <Logo path={slogo} />
+        <Logo path={logo} />
         <Header>Visualize Your Musical Taste</Header>
         <Image path={person} />
+        <Link to="/profile">
         <LoginButton
           onClick={() => {
             window.location = window.location.href.includes("localhost")
@@ -81,6 +85,7 @@ export default class Landing extends Component {
         >
           Login with Spotify
         </LoginButton>
+        </Link>
       </Wrapper>
     );
   }
