@@ -7,6 +7,6 @@ import userReducer from "./userReducer";
 export default combineReducers({
   user:userReducer,
   tracks: trackReducer,
+  features: featureReducer,
   artists: artistReducer,
-  features: featureReducer
 });

@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780.41 3256.13">
-  <title>BG</title>
-  <g>
+
     <rect x="680.41" y="2224.9" width="25" height="400" fill="#6c5dff"/>
     <rect x="132.5" y="2490.63" width="25" height="400" fill="#ff4f89"/>
     <rect x="132.5" y="533.23" width="25" height="400" fill="#6c5dff"/>
@@ -19,5 +18,5 @@
     <rect x="195" y="1413.37" width="35" height="600" fill="#ff52c2"/>
     <rect x="95" y="1282.53" width="50" height="600" fill="#9d5aff"/>
     <rect y="1611.73" width="50" height="400" fill="#ff4f89"/>
-  </g>
+
 </svg>

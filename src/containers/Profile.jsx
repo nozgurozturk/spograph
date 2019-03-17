@@ -6,6 +6,7 @@ import Header from "../components/Header"
 import TopArtists from "../components/TopArtists";
 import TrackList from "../components/TrackList";
 import ArtistList from "../components/ArtistList";
+import TopTrack from "../components/TopTrack";
 
 import logo from "../assets/images/Logo.svg";
 
@@ -30,8 +31,9 @@ export default class Profile extends Component {
         <Logo path={logo} />
         <Header/>
         <TopArtists />
+        <ArtistList />
+        <TopTrack/>
         <TrackList />
-        {/* <ArtistList /> */}
         <Wrapper />
       </Container>
     );

@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import _ from "lodash";
 
-import { fetchArtists } from "../actions";
+import { fetchTracks } from "../actions";
 
-import band from "../assets/images/Artist.svg";
+import track from "../assets/images/Cover.svg";
 
 const Wrapper = styled.section`
   height: 100vh;
@@ -18,9 +18,9 @@ const SecondWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Band = styled(SvgLoader)`
+const Track = styled(SvgLoader)`
   position: absolute;
-  width: 50vw;
+  width: 25vw;
   z-index: -99;
 `;
 const Content = styled.h1`
@@ -39,9 +39,9 @@ const Props = styled.span`
   color: ${props => props.color};
 `;
 
-class TopArtists extends Component {
+class TopTrack extends Component {
   componentDidMount() {
-    this.props.fetchArtists();
+    this.props.fetchTracks();
   }
 
   render() {
@@ -49,25 +49,26 @@ class TopArtists extends Component {
       <Wrapper>
         <SecondWrapper>
           <Content size={"4em"}>
-            Your #1 artist is{" "}
+            Your #1 track is{" "}
             <Props color={"#FF4C4F"}>
-              {_.get(this.props.artists[0], "name")}
+         
+              {_.get(this.props.tracks[0], "name")}
             </Props>
           </Content>
-          <Band path={band} />
+          <Track path={track} />
         </SecondWrapper>
         <Properties>
           <Content size={"2em"}>
+            by{" "}
             <Props color={"#5F83FF"}>
-              %{_.get(this.props.artists[0], "popularity")}
-            </Props>{" "}
-            popularity
+              {_.get(this.props.tracks[0], "artists[0].name")}
+            </Props>
           </Content>
           <Content size={"2em"}>
             <Props color={"#5F83FF"}>
-              {_.get(this.props.artists[0], "followers.total")}
+              {Math.floor(_.get(this.props.tracks[0], "duration_ms")*0.001)}
             </Props>{" "}
-            followers
+            seconds
           </Content>
         </Properties>
       </Wrapper>
@@ -75,9 +76,9 @@ class TopArtists extends Component {
   }
 }
 const mapStateToProps = state => {
-  return { artists: state.artists };
+  return { tracks: state.tracks };
 };
 export default connect(
   mapStateToProps,
-  { fetchArtists }
-)(TopArtists);
+  { fetchTracks }
+)(TopTrack);
