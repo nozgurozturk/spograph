@@ -1,40 +1,47 @@
 import React, { Component } from "react";
-import { SvgLoader } from "react-svgmt";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import _ from "lodash";
+import { SvgLoader } from "react-svgmt";
+import styled from "styled-components";
+import {TweenMax} from "gsap/all"
 
 import { fetchArtists } from "../actions";
 
-import band from "../assets/images/Artist.svg";
+import artist from "../assets/images/artist.svg";
+
 
 const Wrapper = styled.section`
-  height: 100vh;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-`;
-const SecondWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const Band = styled(SvgLoader)`
-  position: absolute;
-  width: 50vw;
-  z-index: -99;
+  height: 100vh;
+  margin-bottom:10vh;
 `;
 const Content = styled.h1`
+  margin-bottom: 2vh;
   font-size: ${props => props.size};
   font-weight: 600;
   letter-spacing: 0.2vh;
   color: #3a3a3a;
+  text-align:right;
 `;
-
-const Properties = styled.h1`
+const Header = styled.div`
+margin-bottom:10vh;
+`;
+const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+`;
+const Band = styled(SvgLoader)`
+  margin-top: -30vh;
+  height: 90vh;
+  z-index: -99;
+`;
+const Properties = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Props = styled.span`
+const Colored = styled.span`
   text-decoration: underline;
   color: ${props => props.color};
 `;
@@ -42,34 +49,47 @@ const Props = styled.span`
 class TopArtists extends Component {
   componentDidMount() {
     this.props.fetchArtists();
+    window.addEventListener('scroll', this.lightAnimation)
+  }
+  lightAnimation=(event)=>{
+    const band = document.querySelector(Band);
+    const axis = band.getClientRects();
+    const y = axis[0].y
+    const light = band.querySelectorAll("svg>polygon");
+    if(y<70){
+      TweenMax.to(light, 2.4, {opacity:1});
+    }
+    
   }
 
   render() {
     return (
       <Wrapper>
-        <SecondWrapper>
+        <Header>
           <Content size={"4em"}>
             Your #1 artist is{" "}
-            <Props color={"#FF4C4F"}>
+            <Colored color={"#FF4C4F"}>
               {_.get(this.props.artists[0], "name")}
-            </Props>
+            </Colored>
           </Content>
-          <Band path={band} />
-        </SecondWrapper>
-        <Properties>
-          <Content size={"2em"}>
-            <Props color={"#5F83FF"}>
-              %{_.get(this.props.artists[0], "popularity")}
-            </Props>{" "}
-            popularity
-          </Content>
-          <Content size={"2em"}>
-            <Props color={"#5F83FF"}>
-              {_.get(this.props.artists[0], "followers.total")}
-            </Props>{" "}
-            followers
-          </Content>
-        </Properties>
+        </Header>
+        <InnerWrapper>
+          <Band path={artist} onSVGReady={this.lightAnimation}/>
+          <Properties>
+            <Content size={"3em"}>
+              <Colored color={"#5F83FF"}>
+                %{_.get(this.props.artists[0], "popularity")}
+              </Colored>{" "}
+              popularity
+            </Content>
+            <Content size={"3em"}>
+              <Colored color={"#5F83FF"}>
+                {_.get(this.props.artists[0], "followers.total")}
+              </Colored>{" "}
+              followers
+            </Content>
+          </Properties>
+        </InnerWrapper>
       </Wrapper>
     );
   }

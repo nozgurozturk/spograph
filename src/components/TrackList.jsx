@@ -15,7 +15,6 @@ const Track = styled.h2`
   margin-top: 0;
   margin-right: 4vh;
   font-weight: 600;
-
   letter-spacing: 0.2vh;
   color: #3a3a3a;
 `;

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import { SvgLoader} from "react-svgmt";
 import styled from "styled-components";
-import person from "../assets/images/Landing.svg";
-import logo from "../assets/images/Logo.svg";
+import person from "../assets/images/landing.svg";
+import logo from "../assets/images/logo.svg";
 
 
 

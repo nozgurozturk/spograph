@@ -1,3 +1,4 @@
+import _ from "lodash"
 import spotify, { accessToken } from "../apis/spotify";
 
 export const fetchTracks = () => async dispatch => {
@@ -22,7 +23,7 @@ export const fetchArtists = () => async dispatch => {
   });
 };
 
-export const fetchFeature = id => async dispatch => {
+export const fetchFeatures = id => async dispatch => {
   const response = await spotify.get(`/audio-features/${id}`, {
     headers: { Authorization: "Bearer " + accessToken }
   });
@@ -42,4 +43,14 @@ export const fetchUser = () => async dispatch => {
     type: "FETCH_USER",
     payload: response.data
   });
+};
+
+export const fetchTracksandFeatures = () => async (dispatch, getState) => {
+ await dispatch(fetchTracks())
+
+ _.chain(getState().tracks)
+  .map("id")
+  .uniq()
+  .forEach(id => dispatch(fetchFeatures(id)))
+  .value()
 };
