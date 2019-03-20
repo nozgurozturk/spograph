@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import { SvgLoader} from "react-svgmt";
 import styled from "styled-components";
+
 import person from "../assets/images/landing.svg";
 import logo from "../assets/images/logo.svg";
-
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +33,6 @@ const Header = styled.h1`
   padding: 0;
   z-index: 99;
 `;
-
 const Image = styled(SvgLoader)`
   margin-top: 4vh;
   height: 46vh;
@@ -60,7 +58,6 @@ const LoginButton = styled.button`
     #c63dd7,
     #6c5dff
   );
-  /* box-shadow: 0px 2px 4px #1a1a1a; */
   transition: 400ms;
   &:hover {
     transition: 400ms;
@@ -68,6 +65,7 @@ const LoginButton = styled.button`
     box-shadow: 0px 4px 8px #1a1a1a;
   }
 `;
+
 export default class Landing extends Component {
   render() {
     return (

@@ -9,7 +9,6 @@ import { fetchArtists } from "../actions";
 
 import artist from "../assets/images/artist.svg";
 
-
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -58,8 +57,7 @@ class TopArtists extends Component {
     const light = band.querySelectorAll("svg>polygon");
     if(y<70){
       TweenMax.to(light, 2.4, {opacity:1});
-    }
-    
+    } 
   }
 
   render() {

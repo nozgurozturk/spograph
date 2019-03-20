@@ -8,14 +8,13 @@ import TrackList from "../components/TrackList";
 import ArtistList from "../components/ArtistList";
 import TopTrack from "../components/TopTrack";
 import DeepDive from "../components/DeepDive";
-
+import Charts from "../components/Charts";
 
 import logo from "../assets/images/logo.svg";
 
 const Container = styled.div`
   margin: 0 5vw 0 5vw;
 `;
-
 const Logo = styled(SvgLoader)`
   margin-top: 8vh;
   height: 8vh;
@@ -33,6 +32,7 @@ export default class Profile extends Component {
         <TopTrack />
         <TrackList />
         <DeepDive />
+        <Charts />
       </Container>
     );
   }
