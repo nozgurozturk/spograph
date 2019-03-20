@@ -52,12 +52,12 @@ class TopArtists extends Component {
   }
   lightAnimation=(event)=>{
     const band = document.querySelector(Band);
-    const axis = band.getClientRects();
-    const y = axis[0].y
-    const light = band.querySelectorAll("svg>polygon");
-    if(y<70){
-      TweenMax.to(light, 2.4, {opacity:1});
-    } 
+    // const axis = band.getClientRects();
+    // const y = axis[0].y
+    // const light = band.querySelectorAll("svg>polygon");
+    // if(y<70){
+    //   TweenMax.to(light, 2.4, {opacity:1});
+    // } 
   }
 
   render() {
