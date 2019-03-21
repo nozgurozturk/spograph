@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { SvgLoader } from "react-svgmt";
-import {TweenMax, Power2} from "gsap/all";
+import {TweenMax, Power2,} from "gsap/all";
+import CSSPlugin from 'gsap/CSSPlugin';
 
 import FeatureList from "../components/FeatureList";
 
 import deepDive from "../assets/images/deep-dive.svg";
+
+const C = CSSPlugin;
 
 const Wrapper = styled.section`
   display: flex;
