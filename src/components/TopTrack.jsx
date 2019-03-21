@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import _ from "lodash";
 import { TweenMax, Linear } from "gsap/all";
+import CSSPlugin from 'gsap/CSSPlugin';
 
 import { fetchTracks } from "../actions";
 
 import cover from "../assets/images/cover.svg";
 import lp from "../assets/images/lp.svg";
+
+const C = CSSPlugin;
 
 const Wrapper = styled.section`
   display: flex;

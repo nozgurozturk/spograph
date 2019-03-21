@@ -40,7 +40,7 @@ const Image = styled.div`
 
 `;
 const Lines = styled(SvgLoader)`
-  width: 105vw;
+  width: 100vw;
   margin-top:-30vh;
   margin-left: -5vw;
 `;

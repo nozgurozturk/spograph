@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { SvgLoader } from "react-svgmt";
 import styled from "styled-components";
 
 const Wrapper = styled.section`

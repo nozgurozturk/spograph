@@ -4,10 +4,13 @@ import _ from "lodash";
 import { SvgLoader } from "react-svgmt";
 import styled from "styled-components";
 import {TweenMax} from "gsap/all"
+import CSSPlugin from 'gsap/CSSPlugin';
 
 import { fetchArtists } from "../actions";
 
 import artist from "../assets/images/artist.svg";
+
+const C = CSSPlugin;
 
 const Wrapper = styled.section`
   display: flex;

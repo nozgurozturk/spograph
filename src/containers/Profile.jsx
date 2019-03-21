@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { SvgLoader } from "react-svgmt";
 import styled from "styled-components";
 import { TimelineMax } from "gsap/all";
+import CSSPlugin from 'gsap/CSSPlugin';
 
 import Header from "../components/Header";
 import TopArtists from "../components/TopArtists";
@@ -13,6 +14,8 @@ import Charts from "../components/Charts";
 import Footer from "../components/Footer";
 
 import logo from "../assets/images/logo.svg";
+
+const C = CSSPlugin;
 
 const Container = styled.div`
   margin: 0 5vw 0 5vw;
