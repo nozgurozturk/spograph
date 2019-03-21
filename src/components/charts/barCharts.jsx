@@ -11,6 +11,11 @@ import Loudness from "./features/Loudness";
 import Speechiness from "./features/Speechiness";
 import Valence from "./features/Valence";
 
+const Wrapper = styled.div`
+display:flex;
+flex-direction:column;
+`;
+
 export default class Barcharts extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +32,7 @@ export default class Barcharts extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.spreadData();
-    }, 1000);
+    }, 1200);
 
   }
   spreadData = () => {
@@ -54,7 +59,7 @@ export default class Barcharts extends Component {
   };
   render() {
     return (
-      <div>
+      <Wrapper>
         <Acousticness acousticness={this.state.acousticness} />
         <Danceability danceability={this.state.danceability} />
         <Energy energy={this.state.energy} />
@@ -63,7 +68,7 @@ export default class Barcharts extends Component {
         <Loudness loudness={this.state.loudness} />
         <Speechiness speechiness={this.state.speechiness} />
         <Valence valence={this.state.valence} />
-      </div>
+      </Wrapper>
     );
   }
 }

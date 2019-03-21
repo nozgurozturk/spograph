@@ -53,9 +53,9 @@ class Charts extends Component {
   render() {
     return (
       <Wrapper>
-        <Radarchart array={this.array} />
-        <Barchart array={this.array} />
         <Timechart array={this.array} />
+        <Barchart array={this.array} />
+        <Radarchart array={this.array} />
       </Wrapper>
     );
   }

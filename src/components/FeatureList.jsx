@@ -29,7 +29,7 @@ class FeatureList extends Component {
   }
   findTrack = () => {
     const array = [];
-    this.props.tracks.map(track => {
+    this.props.tracks.forEach(track => {
       const feature = _.find(
         this.props.features,
         feature => feature.id === _.get(track, "id")

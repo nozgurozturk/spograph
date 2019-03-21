@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
+
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
 
 export default class Valence extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ export default class Valence extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#23adff"]
@@ -44,15 +45,11 @@ export default class Valence extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Valence"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -80,7 +77,7 @@ export default class Valence extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.valence, "name");
     const valenceData = _.map(this.props.valence, "valence");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = valenceData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -115,14 +112,26 @@ export default class Valence extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Valence</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            A measure from 0.0 to 1.0 describing the musical positiveness
+            conveyed by a track. Tracks with high valence sound more positive
+            (e.g. happy, cheerful, euphoric), while tracks with low valence
+            sound more negative (e.g. sad, depressed, angry).
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

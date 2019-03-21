@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
+
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
 
 export default class Instrumentalness extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ export default class Instrumentalness extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#2851ff"]
@@ -44,15 +45,11 @@ export default class Instrumentalness extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Instrumentalness"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -83,7 +80,7 @@ export default class Instrumentalness extends Component {
       this.props.instrumentalness,
       "instrumentalness"
     );
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = instrumentalnessData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -118,14 +115,28 @@ export default class Instrumentalness extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Instrumentalness</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            Predicts whether a track contains no vocals. “Ooh” and “aah” sounds
+            are treated as instrumental in this context. Rap or spoken word
+            tracks are clearly “vocal”. The closer the instrumentalness value is
+            to 1.0, the greater likelihood the track contains no vocal content.
+            Values above 0.5 are intended to represent instrumental tracks, but
+            confidence is higher as the value approaches 1.0.
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
+
+import { Wrapper, Title, InnerWrapper, Chart, Expo } from "./Style";
+
 export default class Acousticness extends Component {
   constructor(props) {
     super(props);
@@ -14,13 +16,11 @@ export default class Acousticness extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
-          colors: [
-            "#ff37d6",
-          ]
+          colors: ["#ff37d6"]
         },
         labels: [
           "01",
@@ -45,17 +45,13 @@ export default class Acousticness extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Acousticness"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
-        legend:{
-            show:false
+        },
+        legend: {
+          show: false
         }
       },
       series: [
@@ -81,7 +77,7 @@ export default class Acousticness extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.acousticness, "name");
     const acousticData = _.map(this.props.acousticness, "acousticness");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = acousticData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -116,14 +112,24 @@ export default class Acousticness extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Acousticness</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            A confidence measure from 0.0 to 1.0 of whether the track is
+            acoustic. 1.0 represents high confidence the track is acoustic
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

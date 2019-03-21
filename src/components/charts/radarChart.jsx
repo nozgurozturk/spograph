@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import RadarChart from "react-apexcharts";
+
+const Wrapper = styled.div`
+  width: 100vw;
+  margin-top:10vh;
+  margin:auto;
+`;
 
 export default class Radarchart extends Component {
   constructor(props) {
@@ -10,20 +16,22 @@ export default class Radarchart extends Component {
     this.state = {
       options: {
         chart: {
-            toolbar:{
-                show:false
-            }
+          toolbar: {
+            show: false
+          }
         },
-        fill:{
-            opacity:0.3
+        plotOptions: {
+          radar: {
+            size: undefined
+          }
+        },
+        fill: {
+          opacity: 0.3
         },
         stroke: {
           show: false,
-          width: 0,
-        //   colors: [],
-        //   dashArray: 0
+          width: 0
         },
-        plotOptions: {},
         markers: {
           size: 2,
           strokeWidth: 0
@@ -75,7 +83,34 @@ export default class Radarchart extends Component {
           itemMargin: {
             horizontal: 2
           }
-        }
+        },
+        responsive: [
+          {
+            breakpoint: 768,
+            options: {
+              chart:{
+                height:350
+              },
+              labels: [
+                "A",
+                "D",
+                "E",
+                "I",
+                "L",
+                "S",
+                "V"
+              ],
+              plotOptions: {
+                radar: {
+                  size: 150,
+                }
+              },
+              legend: {
+                show: false,
+              }
+            }
+          }
+        ]
       },
       seriesRadar: [
         { name: "01", data: [0, 0, 0, 0, 0, 0, 0] },
@@ -97,41 +132,43 @@ export default class Radarchart extends Component {
         { name: "17", data: [0, 0, 0, 0, 0, 0, 0] },
         { name: "18", data: [0, 0, 0, 0, 0, 0, 0] },
         { name: "19", data: [0, 0, 0, 0, 0, 0, 0] },
-        { name: "20", data: [0, 0, 0, 0, 0, 0, 0] },
+        { name: "20", data: [0, 0, 0, 0, 0, 0, 0] }
       ]
     };
   }
 
-  updateSeries = () => {  
-    const newSeries = []
-   _.map(this.props.array, d => {
-     const data = [
-          d.acousticness,
-          d.danceability,
-          d.energy,
-          d.instrumentalness,
-          d.liveness,
-          d.speechiness,
-          d.valence
-        ];
-        newSeries.push({data, name:d.name})
-      });
-      this.setState({seriesRadar:newSeries})
+  updateSeries = () => {
+    const newSeries = [];
+    _.map(this.props.array, d => {
+      const data = [
+        d.acousticness,
+        d.danceability,
+        d.energy,
+        d.instrumentalness,
+        d.liveness,
+        d.speechiness,
+        d.valence
+      ];
+      newSeries.push({ data, name: d.name });
+    });
+    this.setState({ seriesRadar: newSeries });
   };
 
-componentDidMount(){
+  componentDidMount() {
     setTimeout(() => {
-        this.updateSeries();
-    }, 1000);}
+      this.updateSeries();
+    }, 1000);
+  }
   render() {
-
     return (
-      <Chart
-        options={this.state.options}
-        series={this.state.seriesRadar}
-        type="radar"
-        width="100%"
-      />
+      <Wrapper>
+        <RadarChart
+          options={this.state.options}
+          series={this.state.seriesRadar}
+          type="radar"
+          width="90%"
+        />
+      </Wrapper>
     );
   }
 }

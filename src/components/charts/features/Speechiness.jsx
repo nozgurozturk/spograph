@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
 
-export default class Instrumentalness extends Component {
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
+
+export default class Speechiness extends Component {
   constructor(props) {
     super(props);
 
@@ -15,8 +16,8 @@ export default class Instrumentalness extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#249dff"]
@@ -44,15 +45,11 @@ export default class Instrumentalness extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Speechiness"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -80,7 +77,7 @@ export default class Instrumentalness extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.speechiness, "name");
     const speechinessData = _.map(this.props.speechiness, "speechiness");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = speechinessData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -115,14 +112,30 @@ export default class Instrumentalness extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Speechiness</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            Speechiness detects the presence of spoken words in a track.
+            The more exclusively speech-like the recording (e.g. talk show,
+            audio book, poetry), the closer to 1.0 the attribute value. Values
+            above 0.66 describe tracks that are probably made entirely of spoken
+            words. Values between 0.33 and 0.66 describe tracks that may contain
+            both music and speech, either in sections or layered, including such
+            cases as rap music. Values below 0.33 most likely represent music
+            and other non-speech-like tracks.
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

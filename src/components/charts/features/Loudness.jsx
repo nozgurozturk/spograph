@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
 
-export default class Valence extends Component {
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
+
+export default class Loudness extends Component {
   constructor(props) {
     super(props);
 
@@ -15,8 +16,8 @@ export default class Valence extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#23b6ff"]
@@ -44,15 +45,11 @@ export default class Valence extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Loudness"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -80,7 +77,7 @@ export default class Valence extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.loudness, "name");
     const loudnessData = _.map(this.props.loudness, "loudness");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = loudnessData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -115,14 +112,27 @@ export default class Valence extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Loudness</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            The overall loudness of a track in decibels (dB). Loudness values
+            are averaged across the entire track and are useful for comparing
+            relative loudness of tracks. Loudness is the quality of a sound that
+            is the primary psychological correlate of physical strength
+            (amplitude). Values typical range between -60 and 0 db.
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

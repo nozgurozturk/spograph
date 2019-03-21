@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
 
-export default class Instrumentalness extends Component {
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
+
+export default class Liveness extends Component {
   constructor(props) {
     super(props);
 
@@ -15,8 +16,8 @@ export default class Instrumentalness extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#2677ff"]
@@ -44,15 +45,11 @@ export default class Instrumentalness extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Liveness"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -80,7 +77,7 @@ export default class Instrumentalness extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.liveness, "name");
     const livenessData = _.map(this.props.liveness, "liveness");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = livenessData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -115,14 +112,26 @@ export default class Instrumentalness extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Liveness</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            Detects the presence of an audience in the recording. Higher
+            liveness values represent an increased probability that the track
+            was performed live. A value above 0.8 provides strong likelihood
+            that the track is live.
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

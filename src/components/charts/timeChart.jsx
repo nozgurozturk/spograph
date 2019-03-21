@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
-
-const Time = styled.div`
-  width: 100vw;
+import CircleChart from "react-apexcharts";
+const Wrapper = styled.div`
+  margin:auto;
+  margin-bottom:10vh;
+  width: 50vw;
+  @media only screen and (max-width: 768px) {
+    width:100vw;
+  }
 `;
-
 export default class Timechart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       options: {
-        labels: [],
         colors: [
           "#ff3b7c",
           "#ff3a92",
@@ -69,18 +71,33 @@ export default class Timechart extends Component {
               }
             }
           }
-        }
+        },
+        responsive: [
+          {
+            breakpoint: 768,
+            options: {
+              chart:{
+                height:300
+              },
+              plotOptions: {
+                radialBar: {
+                  size: 150,
+                }
+              },
+            }
+          }
+        ]
       },
       series: []
     };
   }
   componentDidMount() {
     setTimeout(() => {
-        this.getData();
-    }, 1000);
+      this.getData();
+    }, 1200);
   }
   getData = () => {
-    const labels = _.map(this.props.array, "name");
+    const newLabels = _.map(this.props.array, "name");
     const milisecond = _.map(this.props.array, "duration_ms");
     const msToMinutes = n => {
       return (Math.floor(n) / 6) * (1 / 10000);
@@ -92,42 +109,48 @@ export default class Timechart extends Component {
     };
     const percentd = _.map(minutes, minToPerc);
     this.setState({
-        options: { ...this.state.options,
-          labels: labels,
-          plotOptions: { ...this.state.options.plotOptions,
-            radialBar: { ...this.state.options.plotOptions.radialBar,
-              dataLabels: { ...this.state.options.plotOptions.radialBar.dataLabels,
-                value: { ...this.state.options.plotOptions.radialBar.dataLabels.value,
-                  formatter: val => {
-                    return Math.floor((val / 10) * this.max) / 10 + " minutes";
-                  }
-                },
-                total: { ...this.state.options.plotOptions.radialBar.dataLabels.total,
-                  formatter: () => {
-                    return Math.floor(
-                      _.reduce(minutes, (sum, n) => {
-                        return sum + n;
-                      })
-                    );
-                  }
+      options: {
+        ...this.state.options,
+        labels: newLabels,
+        plotOptions: {
+          ...this.state.options.plotOptions,
+          radialBar: {
+            ...this.state.options.plotOptions.radialBar,
+            dataLabels: {
+              ...this.state.options.plotOptions.radialBar.dataLabels,
+              value: {
+                ...this.state.options.plotOptions.radialBar.dataLabels.value,
+                formatter: val => {
+                  return Math.floor((val / 10) * max) / 10 + " minutes";
+                }
+              },
+              total: {
+                ...this.state.options.plotOptions.radialBar.dataLabels.total,
+                formatter: () => {
+                  return Math.floor(
+                    _.reduce(minutes, (sum, n) => {
+                      return sum + n;
+                    })
+                  );
                 }
               }
             }
           }
-        }, series : percentd
-      });
+        }
+      },
+      series: percentd
+    });
   };
   render() {
-   
     return (
-      <div>
-        <Chart
+      <Wrapper>
+        <CircleChart
           options={this.state.options}
           series={this.state.series}
           type="radialBar"
-          width="60%"
+          width="100%"
         />
-      </div>
+      </Wrapper>
     );
   }
 }

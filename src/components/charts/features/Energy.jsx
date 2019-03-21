@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
+
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
 
 export default class Energy extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ export default class Energy extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#382cff"]
@@ -44,15 +45,11 @@ export default class Energy extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Energy"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -80,7 +77,7 @@ export default class Energy extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.energy, "name");
     const energyData = _.map(this.props.energy, "energy");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = energyData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -115,14 +112,28 @@ export default class Energy extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Energy</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            Energy is a measure from 0.0 to 1.0 and represents a perceptual
+            measure of intensity and activity. Typically, energetic tracks feel
+            fast, loud, and noisy. For example, death metal has high energy,
+            while a Bach prelude scores low on the scale. Perceptual features
+            contributing to this attribute include dynamic range, perceived
+            loudness, timbre, onset rate, and general entropy.
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }

@@ -11,23 +11,28 @@ import cover from "../assets/images/cover.svg";
 import lp from "../assets/images/lp.svg";
 
 const Wrapper = styled.section`
-  height: 80vh;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  margin-bottom: 10vh;
+  margin-bottom: 20vh;
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 const Image = styled.div`
   width: 40vw;
+  @media only screen and (max-width: 992px) {
+    height:60vh;
+  }
 `;
 const Cover = styled(SvgLoader)`
   position: absolute;
-  width: 50vh;
+  height: 50vh;
   z-index: -98;
 `;
 const Lp = styled(SvgLoader)`
   position: absolute;
-  width: 50vh;
+  height: 50vh;
   z-index: -99;
 `;
 const Track = styled.div`
@@ -42,6 +47,9 @@ const Content = styled.h1`
   letter-spacing: 0.2vh;
   color: #3a3a3a;
   text-align: right;
+  @media only screen and (max-width: 992px) {
+    text-align: left;
+  }
 `;
 const Colored = styled.span`
   text-decoration: underline;
@@ -63,7 +71,7 @@ class TopTrack extends Component {
     const axis = lp.getClientRects();
     const y = axis[0].y;
     if (y < 400) {
-      TweenMax.to(lp, 2.4, { x: "38vh" });
+      TweenMax.to(lp, 2.4, { x: "20vw" });
     }
   };
 

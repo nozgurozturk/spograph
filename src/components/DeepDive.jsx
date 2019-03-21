@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { SvgLoader } from "react-svgmt";
-import _ from "lodash";
 import {TweenMax, Power2} from "gsap/all";
 
 import FeatureList from "../components/FeatureList";
@@ -20,7 +19,6 @@ const TracksWrapper = styled.div`
 `;
 const ImageWrapper = styled.div`
   justify-self:flex-end;
-
   width: 40vw;
 `;
 const Header = styled.h1`

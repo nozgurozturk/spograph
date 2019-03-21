@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import _ from "lodash";
-import Chart from "react-apexcharts";
+import BarChart from "react-apexcharts";
+
+import {Wrapper, Title, InnerWrapper, Chart, Expo} from "./Style";
 
 export default class Danceability extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ export default class Danceability extends Component {
           }
         },
         stroke: {
-          width: [0, 4],
-          colors: ["#FF0000", "#ff0000"]
+          width: [0, 2],
+          colors: ["#000000", "#ff0000"]
         },
         fill: {
           colors: ["#cf33ff"]
@@ -44,15 +45,11 @@ export default class Danceability extends Component {
           "20"
         ],
         xaxis: {
-          type: "category"
-        },
-        yaxis: [
-          {
-            title: {
-              text: "Danceability"
-            }
+          type: "category",
+          labels: {
+            rotate: -90
           }
-        ],
+        },
         legend: {
           show: false
         }
@@ -80,7 +77,7 @@ export default class Danceability extends Component {
     const newSeries = [];
     const newLabels = _.map(this.props.danceability, "name");
     const danceData = _.map(this.props.danceability, "danceability");
-    this.state.series.map(s => {
+    this.state.series.forEach(s => {
       const data = danceData;
       newSeries.push({ data: data, type: s.type });
     });
@@ -115,14 +112,26 @@ export default class Danceability extends Component {
   };
   render() {
     return (
-      <div>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height="350"
-        />
-      </div>
+      <Wrapper>
+        <Title>Danceability</Title>
+        <InnerWrapper>
+          <Chart>
+            <BarChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="90%"
+              height="350"
+            />
+          </Chart>
+          <Expo>
+            Danceability describes how suitable a track is for dancing based on
+            a combination of musical elements including tempo, rhythm stability,
+            beat strength, and overall regularity. A value of 0.0 is least
+            danceable and 1.0 is most danceable.
+          </Expo>
+        </InnerWrapper>
+      </Wrapper>
     );
   }
 }
