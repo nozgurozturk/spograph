@@ -8,7 +8,6 @@ import App from "./App";
 import "./index.css";
 import reducers from "./reducers";
 
-import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -18,4 +17,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-serviceWorker.unregister();
+

@@ -6,12 +6,14 @@ import Profile from "./containers/Profile";
 export default class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <div>
+      <BrowserRouter basename="/">
       <div className="App">
         <Route exact path="/" component={Landing}/>
-        <Route path="/profile" component={Profile}/>
+        <Route exact path="/profile" component={Profile}/>
       </div>
       </BrowserRouter>
+      </div>
     );
   }
 }
